@@ -1,4 +1,6 @@
 const productTbl = require('../models/ProductModel');
+const subcategoryTbl = require('../models/SubcategoryModel');
+const categoryTbl = require('../models/CategoryModel');
 
 const productinsert = async(req,res) => {
    try{
@@ -25,6 +27,38 @@ const productinsert = async(req,res) => {
        return false;
    }
 }
+const productviewapi = async(req,res) => {
+  try{
+    const results = await categoryTbl.aggregate([
+      {
+        $lookup: {
+          from: 'subcategories',
+          localField: '_id',
+          foreignField: 'categoryId',
+          as: 'subcategory',
+        },
+      },
+      {
+        $unwind: '$subcategory',
+      },
+      {
+        $lookup: {
+          from: 'products',
+          localField: 'subcategory._id',
+          foreignField: 'subcategoryId',
+          as: 'product',
+        },
+      },
+      // {
+      //   $unwind: '$product',
+      // },
+    ]);
+    res.json(results);
+  }catch(err){
+    console.log(err);
+    return false;
+  }
+}
 module.exports = {
-    productinsert
+    productinsert,productviewapi
 }

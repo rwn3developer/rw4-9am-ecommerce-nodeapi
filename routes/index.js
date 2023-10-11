@@ -38,5 +38,6 @@ routes.get('/viewcategory',verifyToken,categorycontroller.viewcategory);
 routes.post('/subcategoryinsert',subcategorycontroller.subcategoryinsert); 
 routes.get('/viewsubcategory',subcategorycontroller.viewsubcategory);
 routes.post('/productinsert',imageUpload,productcontroller.productinsert);
+routes.get('/productviewapi',productcontroller.productviewapi);
 
 module.exports = routes;
