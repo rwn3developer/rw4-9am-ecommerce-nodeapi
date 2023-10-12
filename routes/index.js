@@ -13,6 +13,7 @@ const admincontroller = require('../controllers/AdminController');
 const categorycontroller = require('../controllers/CategoryController');
 const subcategorycontroller = require('../controllers/SubcategoryController');
 const productcontroller = require('../controllers/ProductController');
+const cartcontroller = require('../controllers/CartController');
 
 
 //file upload
@@ -39,5 +40,6 @@ routes.post('/subcategoryinsert',subcategorycontroller.subcategoryinsert);
 routes.get('/viewsubcategory',subcategorycontroller.viewsubcategory);
 routes.post('/productinsert',imageUpload,productcontroller.productinsert);
 routes.get('/productviewapi',productcontroller.productviewapi);
+routes.post('/addtocartinsert',cartcontroller.addtocartinsert);
 
 module.exports = routes;
